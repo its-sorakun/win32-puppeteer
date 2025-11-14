@@ -18,6 +18,10 @@ int main() {
         cout << "could not find edit control" << endl;
         return 1;
     }
+
+    // inject a single character directly into the message queue
+    // WM_CHAR bypasses the physical keyboard state and input focus entirely
+    SendMessageA(hEdit, WM_CHAR, 'x', 0);
     
     return 0;
 }
