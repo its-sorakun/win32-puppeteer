@@ -19,9 +19,14 @@ int main() {
         return 1;
     }
 
-    // inject a single character directly into the message queue
-    // WM_CHAR bypasses the physical keyboard state and input focus entirely
-    SendMessageA(hEdit, WM_CHAR, 'x', 0);
+    // inject text directly into the message queue
+    // WM_CHAR bypasses the physical keyboard state and input focus entirely,
+    // allowing automation of a minimized or background window
+    const char* msg = "ghost in the machine\r\n";
+    for (int i = 0; msg[i] != '\0'; i++) {
+        SendMessageA(hEdit, WM_CHAR, msg[i], 0);
+        Sleep(100);
+    }
     
     return 0;
 }
